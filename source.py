@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 from sklearn import linear_model
+#import matplotlib.pyplot as plt
 reg = linear_model.LinearRegression()
 
 
@@ -72,18 +73,18 @@ def cleanData(v):
 
     return v
 
-main_df = pd.read_csv('heart.csv')
+#read data from csv file
+main_df = pd.read_csv('data/cleanHeart.csv')
 
-main_df = cleanData(main_df)
+#main_df = cleanData(main_df)
 
 #os.makedirs('data', exist_ok=True)
 #main_df.to_csv('data/cleanHeart.csv', index=False)
 
 
-regu = reg.fit(main_df[['Age','Sex', 'ChestPainType', 'RestingBP', 'Cholesterol', 'FastingBS', 'RestingECG', 'MaxHR', 'ExerciseAngina', 'Oldpeak', 'ST_Slope']],'HeartDisease')
+regu = reg.fit(main_df[['Age','Sex', 'ChestPainType', 'RestingBP', 'Cholesterol', 'FastingBS', 'RestingECG', 'MaxHR', 'ExerciseAngina', 'Oldpeak', 'ST_Slope']],main_df['HeartDisease'])
 
-
-tester = regu.predict([[44,0,1,150,288,0,0,150,1,3.0,0,1]])
+tester = regu.predict([[36,0,1,120,267,0,0,160,0,3.0,0]])
 
 
 print(tester)
