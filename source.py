@@ -2,9 +2,15 @@ import csv
 import pandas as pd
 import numpy as np
 import os
-from sklearn import linear_model
-#import matplotlib.pyplot as plt
-reg = linear_model.LinearRegression()
+from sklearn import linear_model, preprocessing
+from sklearn.model_selection import train_test_split
+import seaborn as sns
+sns.set(style="white")
+sns.set(style="whitegrid", color_codes=True)
+import matplotlib.pyplot as plt
+plt.rc("font", size=14)
+linReg = linear_model.LinearRegression()
+logReg = linear_model.LogisticRegression()
 
 
 def cleanData(v):
@@ -82,9 +88,9 @@ main_df = pd.read_csv('data/cleanHeart.csv')
 #main_df.to_csv('data/cleanHeart.csv', index=False)
 
 
-regu = reg.fit(main_df[['Age','Sex', 'ChestPainType', 'RestingBP', 'Cholesterol', 'FastingBS', 'RestingECG', 'MaxHR', 'ExerciseAngina', 'Oldpeak', 'ST_Slope']],main_df['HeartDisease'])
+regu = linReg.fit(main_df[['Age','Sex', 'ChestPainType', 'RestingBP', 'Cholesterol', 'FastingBS', 'RestingECG', 'MaxHR', 'ExerciseAngina', 'Oldpeak', 'ST_Slope']],main_df['HeartDisease'])
 
-tester = regu.predict([[36,0,1,120,267,0,0,160,0,3.0,0]])
+tester = regu.predict([[65,0,3,140,306,1,0,87,1,1.5,0]])
 
 
 print(tester)
